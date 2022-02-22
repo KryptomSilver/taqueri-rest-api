@@ -11,4 +11,13 @@ router.post(
   ProductCtrl.createProduct
 );
 router.get("/", ProductCtrl.findAllProducts);
+router.put(
+  "/",
+  [
+    check("idProduct").notEmpty().isNumeric(),
+    check("name").notEmpty().isString(),
+    check("description").notEmpty().isString(),
+  ],
+  ProductCtrl.updateProductById
+);
 export default router;
