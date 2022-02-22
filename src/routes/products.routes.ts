@@ -10,4 +10,5 @@ router.post(
   ],
   ProductCtrl.createProduct
 );
+router.get("/", ProductCtrl.findAllProducts);
 export default router;

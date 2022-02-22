@@ -33,5 +33,16 @@ const productsCtrl = {
       console.log(error);
     }
   },
+  findAllProducts: async (req: Request, res: Response) => {
+    try {
+      const connection = getConnection();
+      const productRepository = connection.getRepository(Product);
+      const products = await productRepository.find();
+      return res.status(200).json(products);
+    } catch (error: any) {
+      res.status(500).json({ message: "Ups.." });
+      console.log(error);
+    }
+  },
 };
 export default productsCtrl;
