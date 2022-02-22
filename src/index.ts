@@ -16,3 +16,7 @@ app.use(express.urlencoded({ extended: false }));
 app.get("/", (req: Request, res: Response) => {
   res.status(200).json({ message: "REST API taqueria" });
 });
+app.use("/products", routes.productRouter);
+app.listen(PORT, () => {
+  console.log(`Server run on port ${PORT}`);
+});
