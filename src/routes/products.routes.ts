@@ -20,4 +20,9 @@ router.put(
   ],
   ProductCtrl.updateProductById
 );
+router.delete(
+  "/",
+  [check("idProduct").notEmpty().isNumeric()],
+  ProductCtrl.deleteProduct
+);
 export default router;

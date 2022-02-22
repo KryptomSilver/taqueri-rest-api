@@ -71,5 +71,27 @@ const productsCtrl = {
       console.log(error);
     }
   },
+  deleteProduct: async (req: Request, res: Response) => {
+    try {
+      const { idProduct } = req.body;
+      const connection = getConnection();
+      const productRepository = connection.getRepository(Product);
+      const existProduct = await productRepository.find({
+        where: {
+          id: idProduct,
+        },
+      });
+      if (Object.keys(existProduct).length === 0) {
+        return res.status(404).json({ message: "Product not exists" });
+      }
+      await productRepository.delete({
+        id: idProduct,
+      });
+      return res.status(201).json({ message: "Product deleted" });
+    } catch (error: any) {
+      res.status(500).json({ message: "Ups.." });
+      console.log(error);
+    }
+  },
 };
 export default productsCtrl;
